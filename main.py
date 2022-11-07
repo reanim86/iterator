@@ -5,14 +5,16 @@ class FlatIterator:
 
     def __iter__(self):
         self.item = []
+        for value in self.list_of_list:
+            for var in value:
+                self.item.append(var)
         return self
 
     def __next__(self):
-        if not self.list_of_list:
+        if not self.item:
             raise StopIteration
-        list = self.list_of_list.pop()
-        self.item.extend(list)
-        return self.item
+        values = self.item.pop(0)
+        return values
 
 def test_1():
 
@@ -34,9 +36,3 @@ def test_1():
 
 if __name__ == '__main__':
     test_1()
-
-# some_list = [[1, 2, 3], [4, 5, 6]]
-#
-# for item in FlatIterator(some_list):
-#     print(item)
-
